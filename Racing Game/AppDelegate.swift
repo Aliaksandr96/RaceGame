@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  RaceGame
+//  Racing Game
 //
-//  Created by Aliaksandr Hunko on 28/06/2022.
+//  Created by Aliaksandr Hunko on 01/07/2022.
 //
 
 import UIKit
