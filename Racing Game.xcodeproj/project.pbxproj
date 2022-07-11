@@ -46,7 +46,6 @@
 		DAEB7ED1286F918700411B62 = {
 			isa = PBXGroup;
 			children = (
-				DAEB7EF3286F91C400411B62 /* Controller's */,
 				DAEB7EDC286F918700411B62 /* Racing Game */,
 				DAEB7EDB286F918700411B62 /* Products */,
 			);
@@ -66,22 +65,15 @@
 				DAEB7EDD286F918700411B62 /* AppDelegate.swift */,
 				DAEB7EDF286F918700411B62 /* SceneDelegate.swift */,
 				DAEB7EE1286F918700411B62 /* MainViewController.swift */,
+				DAEB7EF1286F91BF00411B62 /* NewGameViewController.swift */,
+				DAEB7EF4286F91E800411B62 /* SettingViewController.swift */,
+				DAEB7EF6286F91FB00411B62 /* RecordsViewController.swift */,
 				DAEB7EE3286F918700411B62 /* Main.storyboard */,
 				DAEB7EE6286F918900411B62 /* Assets.xcassets */,
 				DAEB7EE8286F918900411B62 /* LaunchScreen.storyboard */,
 				DAEB7EEB286F918900411B62 /* Info.plist */,
 			);
 			path = "Racing Game";
-			sourceTree = "<group>";
-		};
-		DAEB7EF3286F91C400411B62 /* Controller's */ = {
-			isa = PBXGroup;
-			children = (
-				DAEB7EF1286F91BF00411B62 /* NewGameViewController.swift */,
-				DAEB7EF4286F91E800411B62 /* SettingViewController.swift */,
-				DAEB7EF6286F91FB00411B62 /* RecordsViewController.swift */,
-			);
-			path = "Controller's";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
