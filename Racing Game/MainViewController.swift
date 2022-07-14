@@ -9,58 +9,49 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    let imageRoad = UIImage(named: "Road")
+    let backgroundRoad = UIImageView()
+    
     var newGameBtn: UIButton = UIButton()
     var settingBtn: UIButton = UIButton()
     var recordsBtn: UIButton = UIButton()
     
-    let widthBtn = 160
-    let heightBtn = 80
-    let xBtn = 0
-    let yBtn = 0
+    let widthBtn:CGFloat = 150
+    let heightBtn:CGFloat = 50
+    let xBtn:CGFloat = 0
+    let yBtn:CGFloat = 0
     
-    func creatNewButton(xBtn: Int, yBtn: Int, backgroundColor: UIColor, buttonTitle: String) -> UIButton {
-        
-        let newButton = UIButton()
-        
-        newButton.frame = CGRect(x: xBtn, y: yBtn, width: 150, height: 60)
-        newButton.backgroundColor = backgroundColor
-        newButton.clipsToBounds = true
-        newButton.layer.cornerRadius = newButton.bounds.height / 2
-        newButton.setTitle(buttonTitle, for: .normal)
-        
-        return newButton
-        
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        view.backgroundColor = .systemCyan
+        
+        backgroundRoad.frame = view.frame
+        backgroundRoad.image = imageRoad
+        view.addSubview(backgroundRoad)
         
         // CREATE NEW GAME BUTTON
         
-        let xNewGameBtn = (Int(view.bounds.width) / 2) - (widthBtn / 2)
-        let yNewGameBtn = (Int(view.bounds.height) / 2) - heightBtn
+        let xNewGameBtn: CGFloat = view.bounds.width / 2 - widthBtn / 2
+        let yNewGameBtn: CGFloat = view.bounds.height / 2 - (heightBtn * 2)
         
-        newGameBtn = creatNewButton(xBtn: xNewGameBtn, yBtn: yNewGameBtn, backgroundColor: .systemYellow, buttonTitle: "New Game")
+        newGameBtn = creatNewButton(xBtn: xNewGameBtn, yBtn: yNewGameBtn, buttonTitle: "New Game")
         newGameBtn.addTarget(self, action: #selector(showNewGameViewController), for: .touchUpInside )
         view.addSubview(newGameBtn)
         
         // CREATE SETTING BUTTON
         
-        let xSettingBtn = (Int(view.bounds.width) / 2) - (widthBtn / 2)
-        let ySettingBtn = (Int(view.bounds.height) / 2)
+        let xSettingBtn = view.bounds.width / 2 - widthBtn / 2
+        let ySettingBtn = view.bounds.height / 2 - heightBtn + 10
         
-        settingBtn = creatNewButton(xBtn: xSettingBtn, yBtn: ySettingBtn, backgroundColor: .systemYellow, buttonTitle: "Setting")
+        settingBtn = creatNewButton(xBtn: xSettingBtn, yBtn: ySettingBtn, buttonTitle: "Setting")
         settingBtn.addTarget(self, action: #selector(showSettingViewController), for: .touchUpInside )
         view.addSubview(settingBtn)
         
         // CREATE RECORDS BUTTON
         
-        let xRecordsBtn = (Int(view.bounds.width) / 2) - (widthBtn / 2)
-        let yRecordsBtn = (Int(view.bounds.height) / 2) + heightBtn
+        let xRecordsBtn = view.bounds.width / 2 - widthBtn / 2
+        let yRecordsBtn = view.bounds.height / 2 + (heightBtn / 2) - (heightBtn / 4) + 10
         
-        recordsBtn = creatNewButton(xBtn: xRecordsBtn, yBtn: yRecordsBtn, backgroundColor: .systemYellow, buttonTitle: "Records")
+        recordsBtn = creatNewButton(xBtn: xRecordsBtn, yBtn: yRecordsBtn, buttonTitle: "Records")
         recordsBtn.addTarget(self, action: #selector(showRecordsViewController), for: .touchUpInside )
         view.addSubview(recordsBtn)
         
@@ -88,3 +79,22 @@ class MainViewController: UIViewController {
     }
 }
 
+extension MainViewController {
+    
+    func creatNewButton(xBtn: CGFloat, yBtn: CGFloat, buttonTitle: String) -> UIButton {
+        
+        let newButton = UIButton()
+        
+        newButton.frame = CGRect(x: xBtn, y: yBtn, width: widthBtn, height: heightBtn)
+        newButton.backgroundColor = .systemGray3
+        newButton.layer.opacity = 0.75
+        newButton.setTitleColor(.red, for: .normal)
+        newButton.clipsToBounds = true
+        newButton.layer.cornerRadius = newButton.bounds.height / 2
+        newButton.setTitle(buttonTitle, for: .normal)
+        
+        return newButton
+        
+    }
+    
+}
