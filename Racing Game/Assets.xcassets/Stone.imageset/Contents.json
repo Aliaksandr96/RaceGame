@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Stone2-2.png",
+      "filename" : "Stone.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Stone2.png",
+      "filename" : "Stone-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Stone2-1.png",
+      "filename" : "Stone-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
