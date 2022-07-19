@@ -9,16 +9,40 @@ import UIKit
 
 class NewGameViewController: UIViewController {
     
+    // MARK: Constants
+    
     let BackgroundView = UIImageView()
     let CarView = UIImageView()
     let StoneView = UIImageView()
     
     let NavigationBar = UIView()
+    let LeftRoadSide = UIView()
+    let RightRoadSide = UIView()
+    
     
     let step: CGFloat = 50
     
-    private var variable = Variables()
+    // MARK: Variables
     
+    private struct Variables {
+        
+        var widthCar = CGFloat()
+        var heightCar = CGFloat()
+        
+        var xCar = CGFloat()
+        var yCar = CGFloat()
+        
+        var widthStone = CGFloat()
+        var heightStone = CGFloat()
+        
+        var xStone = CGFloat()
+        var yStone = CGFloat()
+        
+        var stopGame = false
+        
+    }
+    
+    private var variable = Variables()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +51,12 @@ class NewGameViewController: UIViewController {
         BackgroundView.center = view.center
         BackgroundView.image = UIImage(named: "Road")
         view.addSubview(BackgroundView)
+        
+        LeftRoadSide.frame = CGRect(x: 0, y: 0, width: 5, height: BackgroundView.bounds.maxY)
+        BackgroundView.addSubview(LeftRoadSide)
+        
+        RightRoadSide.frame = CGRect(x: BackgroundView.bounds.maxX - 5, y: BackgroundView.bounds.minY - 5, width: 5, height: BackgroundView.bounds.maxY)
+        BackgroundView.addSubview(RightRoadSide)
         
         NavigationBar.frame = CGRect(x: 0, y: 0, width: view.bounds.maxX, height: view.bounds.maxY / 10)
         NavigationBar.backgroundColor = .systemGray3
@@ -44,6 +74,8 @@ class NewGameViewController: UIViewController {
         
     }
     
+    // MARK: Create Car
+    
     func createCar() {
         
         variable.widthCar = BackgroundView.bounds.width / 5
@@ -57,6 +89,8 @@ class NewGameViewController: UIViewController {
         view.addSubview(CarView)
         
     }
+    
+    // MARK: Create Stone
     
     func createStone() {
         
@@ -72,34 +106,41 @@ class NewGameViewController: UIViewController {
         
     }
     
+    // MARK: Move Stone
+    
     func moveStone() {
         
         createStone()
         
-        UIView.animate(withDuration: 1, delay: 0 , options: .curveLinear, animations: {
+        if variable.stopGame == false {
             
-            self.StoneView.frame.origin.y = self.CarView.frame.origin.y - self.StoneView.bounds.height + 1
-            
-        }, completion: { _ in
-            
-            if self.StoneView.frame.intersects(self.CarView.frame) {
+            UIView.animate(withDuration: 1, delay: 0 , options: .curveLinear, animations: {
                 
-                self.alert()
+                self.StoneView.frame.origin.y = self.CarView.frame.origin.y - self.StoneView.bounds.height + 1
                 
-            } else {
+            }, completion: { _ in
                 
-                UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear, animations: {
+                if self.StoneView.frame.intersects(self.CarView.frame) {
                     
-                    self.StoneView.frame.origin.y = self.BackgroundView.frame.maxY
+                    self.alert()
                     
-                }, completion: { _ in
+                } else {
                     
-                    self.moveStone()
-                    
-                })
-            }
-        })
+                    UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear, animations: {
+                        
+                        self.StoneView.frame.origin.y = self.BackgroundView.frame.maxY
+                        
+                    }, completion: { _ in
+                        
+                        self.moveStone()
+                        
+                    })
+                }
+            })
+        }
     }
+    
+    // MARK: Alert
     
     func alert() {
         
@@ -107,11 +148,14 @@ class NewGameViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: "New Game", style: .default) {
             _ in
+            
+            self.variable.stopGame = false
+            self.createCar()
             self.moveStone()
             
         })
         
-        alert.addAction(UIAlertAction(title: "Quit", style: .default) {
+        alert.addAction(UIAlertAction(title: "Main Menu", style: .default) {
             _ in
             self.navigationController?.popToRootViewController(animated: true)
             
@@ -120,6 +164,20 @@ class NewGameViewController: UIViewController {
         self.present(alert, animated: true)
         
     }
+    
+    // MARK: RoadSide Alert
+    
+    func roadSideAlert() {
+        
+        if CarView.frame.intersects(LeftRoadSide.frame) || CarView.frame.intersects(RightRoadSide.frame){
+            
+            alert()
+            variable.stopGame = true
+            
+        }
+    }
+    
+    // MARK: Create gesture
     
     func swipeCar() {
         
@@ -150,29 +208,10 @@ class NewGameViewController: UIViewController {
                 
             }
         }
+        
+        roadSideAlert()
+        
     }
 }
 
-extension NewGameViewController {
-    
-    // MARK: VARIABLES
-    
-    private struct Variables {
-        
-        var widthCar = CGFloat()
-        var heightCar = CGFloat()
-        
-        var xCar = CGFloat()
-        var yCar = CGFloat()
-        
-        var widthStone = CGFloat()
-        var heightStone = CGFloat()
-        
-        var xStone = CGFloat()
-        var yStone = CGFloat()
-        
-        var GameOver = false
-        
-    }
-}
 
