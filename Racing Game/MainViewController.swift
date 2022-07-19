@@ -91,6 +91,11 @@ extension MainViewController {
         newButton.setTitleColor(.red, for: .normal)
         newButton.clipsToBounds = true
         newButton.layer.cornerRadius = newButton.bounds.height / 2
+        newButton.layer.masksToBounds = false
+        newButton.layer.shadowColor = UIColor.lightGray.cgColor
+        newButton.layer.shadowOffset = .zero
+        newButton.layer.shadowOpacity = 1
+        newButton.layer.shadowRadius = newButton.bounds.height / 2
         newButton.setTitle(buttonTitle, for: .normal)
         
         return newButton
